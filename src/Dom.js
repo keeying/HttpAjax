@@ -36,21 +36,24 @@
    * return childNodes {NodeList}
    */
   Dom.createNodes = function (htmlStr, doc) {
-    // 1、<option>和<optgroup>需要包含在<select multiple="multiple">...</section>里；
-    // 2、<lenged>需要包含在<fieldset>...</fieldset>里；
-    // 3、<thead>、<tbody>、<tfoot>、<colgroup>以及<caption>>需要包含在<table>...</table>里；
-    // 4、<tr>需要包含在<table><thead>...</thead></table>、<table><tbody>...</tbody></table>或者
-    //    <table><tfoot>...</tfoot></table>里；
-    // 5、<td>和<th>需要包含在<table><tbody><tr>...<tr></tbody></table>里；
-    // 6、col必须包含在<table><tbody></tbody><colgroup>...</colgroup></table>里；
-    // 7、<lin>和<script>需要包含在<div><div></div>...</div>里。
-    //   
-    // 由于：
-    //   1、使用 multiple 特性的<select>元素（相对的是非多选下拉框），不会自动检测放在其中的选项
-    //     （而单选下拉框会默认选中第一个选项）；
-    //   2、<col>需要一个额外的<tbody>修复，如果没有的话<colgroup>无法正常生成；
-    //   3、<link>和<script>的修复很怪异：IE 浏览器无法通过 innerHTML 生成<link>和<script>元素，
-    //      除非他们包含在另一个节点中，并且还得又一个相邻节点。
+    
+    /*
+     * 1、<option>和<optgroup>需要包含在<select multiple="multiple">...</section>里；
+     * 2、<lenged>需要包含在<fieldset>...</fieldset>里；
+     * 3、<thead>、<tbody>、<tfoot>、<colgroup>以及<caption>>需要包含在<table>...</table>里；
+     * 4、<tr>需要包含在<table><thead>...</thead></table>、<table><tbody>...</tbody></table>或者
+     *    <table><tfoot>...</tfoot></table>里；
+     * 5、<td>和<th>需要包含在<table><tbody><tr>...<tr></tbody></table>里；
+     * 6、col必须包含在<table><tbody></tbody><colgroup>...</colgroup></table>里；
+     * 7、<lin>和<script>需要包含在<div><div></div>...</div>里。
+     *   
+     * 由于：
+     *   1、使用 multiple 特性的<select>元素（相对的是非多选下拉框），不会自动检测放在其中的选项
+     *     （而单选下拉框会默认选中第一个选项）；
+     *   2、<col>需要一个额外的<tbody>修复，如果没有的话<colgroup>无法正常生成；
+     *   3、<link>和<script>的修复很怪异：IE 浏览器无法通过 innerHTML 生成<link>和<script>元素，
+     *      除非他们包含在另一个节点中，并且还得又一个相邻节点。
+     */
     var map = {
       '<td': [3, '<table><tbody><tr>', '</tr></tbody></table>'],
       '<th': [3, '<table><tbody><tr>', '</tr></tbody></table>'],
