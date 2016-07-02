@@ -109,12 +109,13 @@
   ScorpionDOM.insert = function (eles, args, callback) {
     // <tr>元素需要添加到<tbody>里。
     function root(elem, cur) {
-      console.log(cur)
       return elem.nodeName.toLowerCase() === 'table' && cur.nodeName.toLowerCase() === 'tr' ?
       (elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.ownerDocument.createElement('tbody'))) : elem;
     }
+
+    var length = eles.length;
     
-    if (eles.length) {
+    if (length) {
       var doc = eles[0].ownerDocument || eles[0],
         fragment = doc.createDocumentFragment(),
         scripts = ScorpionDOM.createNodes(args, doc, fragment),
@@ -122,9 +123,8 @@
       
       if (first) {
         for (var i = 0; eles[i]; i++) {
-          console.log(root(eles[i], first))
           callback.call(root(eles[i], first),
-            i > 0 ? fragment.cloneNode(true) : fragment);
+            length > 1 ? fragment.cloneNode(true) : fragment);
         }
       }
     }
