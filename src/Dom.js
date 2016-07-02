@@ -13,14 +13,14 @@
   var ignoreTags = /^(abbr|br|col|img|input|link|meta|param|hr|area|embed)$/i;
 
   // Dom 命名空间，所有有关DOM的操作都将绑定在此对象上。
-  var Dom = {};
+  var ScorpionDOM = {};
 
   /**
    * DOM 元素转化，将非自关闭html元素标签转化成正常的html标签
    * @param html {String}  需要转化的html片段
    * @return html {String} 正常html标签
    */
-  Dom.convert = function (html) {
+  ScorpionDOM.convert = function (html) {
     return html.replace(/(<(\w+)[^>]*?)\/>/g, function (match, front, tag) {
       console.log(match)
       console.log(front)
@@ -30,13 +30,14 @@
   };
 
   /**
-   * 创建DOM节点
+   * 创建 DOM 节点
    * @param html {String}
    * @param doc {Document}
+   * @param fragment {DocumentFragment} 用于持有生成的 DOM 节点
    * return childNodes {NodeList}
    */
-  Dom.createNodes = function (htmlStr, doc) {
-    
+  ScorpionDOM.createNodes = function (htmlStr, doc, fragment) {
+
     /*
      * 1、<option>和<optgroup>需要包含在<select multiple="multiple">...</section>里；
      * 2、<lenged>需要包含在<fieldset>...</fieldset>里；
@@ -93,12 +94,47 @@
       div = div.lastChild;
     }
 
+
+    console.log(div);
+
+    // 如果传入了一个 fragment 片段，则让其持有生成的 DOM 节点
+    if (fragment) {
+      while (div.firstChild) {
+        console.log(div.firstChild);
+        fragment.appendChild(div.firstChild);
+      }
+    }
+
     // 返回新创建的元素
     return div.childNodes;
 
   };
 
-  window.Dom = Dom;
+  /**
+   * 插入 DOM 节点
+   */
+  ScorpionDOM.insertDOM = function (eles, args, callback) {
+    // <tr>元素需要添加到<tbody>里。
+    function root(elem, cur) {
+      return elem.nodeName.toLowerCase === 'table' && cur.nodeName.toLowerCase === 'tr' ?
+      (elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.wonerDocument.createElement('tbody'))) : elem;
+    }
+    if (eles.length) {
+      var doc = eles[0].ownerDocument || eles[0],
+        fragment = doc.createDocumentFragment(),
+        scripts = ScorpionDOM.createNodes(args, doc, fragment),
+        first = fragment.firstChild;
 
-  return Dom;
+      if (first) {
+        for (var i = 0; eles[i]; i++) {
+          callback.call(root(eles[i], first),
+            i > 0 ? fragment.cloneNode(true) : fragment);
+        }
+      }
+    }
+  }
+
+  window.ScorpionDOM = ScorpionDOM;
+
+  return ScorpionDOM;
 }));

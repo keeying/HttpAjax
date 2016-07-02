@@ -1,0 +1,32 @@
+{
+  "name": "js-web-tech",
+  "version": "1.0.0",
+  "description": "Javascript web tech.",
+  "main": "GruntFile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keeying/HttpAjax.git"
+  },
+  "keywords": [
+    "javascript",
+    "web",
+    "dom"
+  ],
+  "author": "Keeying",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keeying/HttpAjax/issues"
+  },
+  "homepage": "https://github.com/keeying/HttpAjax#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1"
+  }
+}
