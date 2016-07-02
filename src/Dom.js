@@ -113,7 +113,7 @@
   /**
    * 插入 DOM 节点
    */
-  ScorpionDOM.insertDOM = function (eles, args, callback) {
+  ScorpionDOM.insert = function (eles, args, callback) {
     // <tr>元素需要添加到<tbody>里。
     function root(elem, cur) {
       return elem.nodeName.toLowerCase === 'table' && cur.nodeName.toLowerCase === 'tr' ?
