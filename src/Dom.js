@@ -22,9 +22,6 @@
    */
   ScorpionDOM.convert = function (html) {
     return html.replace(/(<(\w+)[^>]*?)\/>/g, function (match, front, tag) {
-      console.log(match)
-      console.log(front)
-      console.log(tag)
       return ignoreTags.test(tag) ? match : front + '></' + tag + '>';
     });
   };
@@ -119,6 +116,7 @@
       return elem.nodeName.toLowerCase === 'table' && cur.nodeName.toLowerCase === 'tr' ?
       (elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.wonerDocument.createElement('tbody'))) : elem;
     }
+    
     if (eles.length) {
       var doc = eles[0].ownerDocument || eles[0],
         fragment = doc.createDocumentFragment(),
