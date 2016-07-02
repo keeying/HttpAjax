@@ -91,13 +91,9 @@
       div = div.lastChild;
     }
 
-
-    console.log(div);
-
     // 如果传入了一个 fragment 片段，则让其持有生成的 DOM 节点
     if (fragment) {
       while (div.firstChild) {
-        console.log(div.firstChild);
         fragment.appendChild(div.firstChild);
       }
     }
