@@ -105,6 +105,9 @@
 
   /**
    * 插入 DOM 节点
+   * @param eles {NodeList} 目标集合
+   * @param args {String}
+   * @param callback {function}
    */
   ScorpionDOM.insert = function (eles, args, callback) {
     // <tr>元素需要添加到<tbody>里。
