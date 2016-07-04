@@ -128,11 +128,11 @@
         scripts = ScorpionDOM.createNodes(args, doc, fragment),
         first = fragment.firstChild;
 
-      // 将DOM节点循环加入到指定的位置
+      // 将DOM节点循环插入到指定的位置
       if (first) {
         for (var i = 0; eles[i]; i++) {
           callback.call(root(eles[i], first),
-            // 如果需要加入多个位置则，复制文档碎片
+            // 如果需要插入到多个位置，则复制文档碎片
             length-- > 1 ? fragment.cloneNode(true) : fragment);
         }
       }
