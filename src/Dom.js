@@ -113,20 +113,25 @@
     // <tr>元素需要添加到<tbody>里。
     function root(elem, cur) {
       return elem.nodeName.toLowerCase() === 'table' && cur.nodeName.toLowerCase() === 'tr' ?
-      (elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.ownerDocument.createElement('tbody'))) : elem;
+        (elem.getElementsByTagName('tbody')[0] || elem.appendChild(elem.ownerDocument.createElement('tbody'))) : elem;
     }
 
     var length = eles.length;
-    
+
     if (length) {
+      // 获取当前DOM元素所在的文档
       var doc = eles[0].ownerDocument || eles[0],
+        // 创建文档片段用于暂存生成的DOM节点
         fragment = doc.createDocumentFragment(),
+        // 生成节点
         scripts = ScorpionDOM.createNodes(args, doc, fragment),
         first = fragment.firstChild;
-      
+
+      // 将DOM节点循环加入到指定的位置
       if (first) {
         for (var i = 0; eles[i]; i++) {
           callback.call(root(eles[i], first),
+            // 如果需要加入多个位置则，复制文档碎片
             length > 1 ? fragment.cloneNode(true) : fragment);
         }
       }
