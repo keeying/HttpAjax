@@ -133,7 +133,7 @@
         for (var i = 0; eles[i]; i++) {
           callback.call(root(eles[i], first),
             // 如果需要加入多个位置则，复制文档碎片
-            length > 1 ? fragment.cloneNode(true) : fragment);
+            length-- > 1 ? fragment.cloneNode(true) : fragment);
         }
       }
     }
