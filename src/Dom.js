@@ -109,6 +109,7 @@
    * @param args {String}
    * @param callback {function}
    */
+  
   ScorpionDOM.insert = function (eles, args, callback) {
     // <tr>元素需要添加到<tbody>里。
     function root(elem, cur) {
