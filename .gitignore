@@ -3,3 +3,4 @@ test/
 node_modules/
 ajax.js
 jsconfig.json
+*.text
