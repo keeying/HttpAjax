@@ -7,15 +7,15 @@
   } else {
     factory(global);
   }
-} (typeof window !== 'undefined' ? window : this, function (window) {
+}(typeof window !== 'undefined' ? window : this, function (window) {
   'use strict';
   /**
    * HttpAjax 构造函数
    */
-  var HttpAjax = function () { };
-  
-  //空函数，作为默认回调函数
-  var empty = function () { };
+  var HttpAjax = function () {};
+
+  //空函数，作为共享无功能函数，节省资源
+  var empty = function () {};
 
   /**
    * 使用惰性函数创建xhr对象
