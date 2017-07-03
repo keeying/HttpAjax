@@ -1,4 +1,4 @@
-var sniffer = (function () {
+var Sniffer = (function () {
   'use strict';
   // 用户代理
   var ua = window.navigator.userAgent;
